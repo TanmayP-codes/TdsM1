@@ -10,8 +10,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
+      - name: 23f3003281@ds.study.iitm.ac.in
+        run: echo "Hello, world!"
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: 23f3003281@ds.study.iitm.ac.in
-        run: echo "Hello, world!"
+      
