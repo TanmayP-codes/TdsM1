@@ -3,7 +3,7 @@ name: Daily Commit Job
 on:
   schedule:
     - cron: '10 4 * * *'  # Runs daily at 04:10 UTC
-  workflow_dispatch:       # Optional manual trigger
+  workflow_dispatch:
 
 jobs:
   commit-job:
@@ -16,9 +16,12 @@ jobs:
         run: echo "Automated commit at $(date -u)" >> daily-log.txt
 
       - name: Commit and Push Changes
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "tanmaypatil1311@gmail.com"
+          git config --global user.name "Tanmay Bot"
+          git config --global user.email "your-email@example.com"
+          git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}
           git add daily-log.txt
           git commit -m "Daily automated commit at $(date -u)" || echo "Nothing to commit"
-          git push
+          git push origin main
