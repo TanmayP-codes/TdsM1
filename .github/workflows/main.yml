@@ -2,13 +2,16 @@ name: Daily Commit Job
 
 on:
   schedule:
-    # Runs daily at 04:10 UTC (specific hour and minute required)
     - cron: '10 4 * * *'
-  workflow_dispatch: # Optional manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   commit-job:
     runs-on: ubuntu-latest
+
 
     steps:
       - name: Checkout code
