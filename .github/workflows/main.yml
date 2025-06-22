@@ -17,7 +17,7 @@ jobs:
 
       - name: Commit and Push Changes
         run: |
-          git config --global user.name "tanmaypatil1311"
+          git config --global user.name "github-actions[bot]"
           git config --global user.email "tanmaypatil1311@gmail.com"
           git add daily-log.txt
           git commit -m "Daily automated commit at $(date -u)" || echo "Nothing to commit"
