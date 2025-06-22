@@ -1,27 +1,27 @@
-name: Daily Commit Job
+name: Test Commit Push
 
 on:
-  schedule:
-    - cron: '10 4 * * *'  # Daily at 04:10 UTC
   workflow_dispatch:
 
 jobs:
-  commit-job:
+  debug-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
       - name: 23f3003281@ds.study.iitm.ac.in
-        run: echo "Automated commit at $(date -u)" >> daily-log.txt
+        run: echo "Test commit at $(date -u)" >> daily-log.txt
 
-      - name: Commit and Push Changes
+      - name: Commit & Push with Debug
         env:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: |
           git config --global user.name "Tanmay Bot"
-          git config --global user.email "tanmaypatil1311@gmail.com"  # optional
+          git config --global user.email "tanmaypatil1311@gmail.com"
           git remote set-url origin https://x-access-token:${GH_PAT}@github.com/${{ github.repository }}
+          git remote -v
+          git config --global --list
           git add daily-log.txt
-          git commit -m "Daily automated commit at $(date -u)" || echo "Nothing to commit"
+          git commit -m "Manual test commit at $(date -u)" || echo "Nothing to commit"
           git push origin main
